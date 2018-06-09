@@ -1,0 +1,40 @@
+<div class="container">
+    <div class="search-bar-wrapper">
+        <input class="search-bar" 
+        type="text" 
+        ng-model="$ctrl.searchTxt" 
+        ng-keyup="$ctrl.searchHandler()"
+        placeholder="Search by (Name)">
+        <div>
+            
+            Sort by :
+            <input type="radio" value="header" ng-model="$ctrl.sortBy" ng-click="$ctrl.radioHandler()"> Name
+            <input type="radio" value="author" ng-model="$ctrl.sortBy" ng-click="$ctrl.radioHandler()"> Author
+            <input type="radio" value="points" ng-model="$ctrl.sortBy" ng-click="$ctrl.radioHandler()"> Points
+            <input type="radio" value="comments" ng-model="$ctrl.sortBy" ng-click="$ctrl.radioHandler()"> Comments
+            <br> order:
+            <input type="radio" value="" ng-model="$ctrl.order" ng-click="$ctrl.radioHandler()"> ASC
+            <input type="radio" value="-" ng-model="$ctrl.order" ng-click="$ctrl.radioHandler()"> DESC
+            
+        </div> 
+    </div>
+    <div class="news-wrapper" 
+         ng-repeat="news in $ctrl.NewsList | filter: {header: $ctrl.searchTxt}">
+        <span class="serial-number">{{news.srNo}}</span>
+        <span class="logo">
+            <img class="dir-img" 
+                 src="../../../images/play-button.svg" alt="showImg" 
+                 height="5px" width="5px">
+        </span>
+        <div class="news-description-wrapper">
+            <span class="mytitle"><a class="news-url" href="{{news.url}}" target="_blank">{{news.header}}</a>  <span class="url">({{news.showUrl}})</span> </span>  
+            <span class="news-description">{{news.description}}</span>
+        </div>
+    </div>
+    <div class="navigation" ng-hide = "$ctrl.isFilterEnabled">
+        <a href="" class="nav-btn" ng-click="$ctrl.navClickHandler(-1)"> < Previous</a>
+        <a href="" class="nav-btn" ng-click="$ctrl.navClickHandler(1)">Next ></a>
+        <!-- <input type="button" value="Pre"> -->
+        <!-- <input type="button" value="Next"> -->
+    </div>
+</div>
