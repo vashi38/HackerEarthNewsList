@@ -63,6 +63,7 @@
 }
 .search-bar-wrapper {
     display: flex;
+    flex-flow: row wrap;
 }
 
 @media screen and (max-width: 768px) {
