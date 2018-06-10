@@ -8,13 +8,13 @@
         <div>
             
             Sort by :
-            <input type="radio" value="header" ng-model="$ctrl.sortBy" ng-click="$ctrl.radioHandler()"> Name
-            <input type="radio" value="author" ng-model="$ctrl.sortBy" ng-click="$ctrl.radioHandler()"> Author
-            <input type="radio" value="points" ng-model="$ctrl.sortBy" ng-click="$ctrl.radioHandler()"> Points
-            <input type="radio" value="comments" ng-model="$ctrl.sortBy" ng-click="$ctrl.radioHandler()"> Comments
+            <input name = "myRadio" type="radio" value="header" ng-model="$ctrl.sortBy" ng-change="$ctrl.radioHandler()"> Name
+            <input name = "myRadio" type="radio" value="author" ng-model="$ctrl.sortBy" ng-change="$ctrl.radioHandler()"> Author
+            <input name = "myRadio" type="radio" value="points" ng-model="$ctrl.sortBy" ng-change="$ctrl.radioHandler()"> Points
+            <input name = "myRadio" type="radio" value="comments" ng-model="$ctrl.sortBy" ng-change="$ctrl.radioHandler()"> Comments
             <br> order:
-            <input type="radio" value="" ng-model="$ctrl.order" ng-click="$ctrl.radioHandler()"> ASC
-            <input type="radio" value="-" ng-model="$ctrl.order" ng-click="$ctrl.radioHandler()"> DESC
+            <input name = "orderBy" type="radio" value="" ng-model="$ctrl.order" ng-change="$ctrl.radioHandler()"> ASC
+            <input name = "orderBy" type="radio" value="-" ng-model="$ctrl.order" ng-change="$ctrl.radioHandler()"> DESC
             
         </div> 
     </div>
@@ -27,8 +27,8 @@
                  height="5px" width="5px">
         </span>
         <div class="news-description-wrapper">
-            <span class="mytitle"><a class="news-url" href="{{news.url}}" target="_blank">{{news.header}}</a>  <span class="url">({{news.showUrl}})</span> </span>  
-            <span class="news-description">{{news.description}}</span>
+            <span class="mytitle"><a class="news-url" href="{{news.url}}" target="_blank">{{news.header}}</a>  <span class="url">({{news.getFormatedUrl()}})</span> </span>  
+            <span class="news-description">{{news.getFormatedDesc()}}</span>
         </div>
     </div>
     <div class="navigation" ng-hide = "$ctrl.isFilterEnabled">

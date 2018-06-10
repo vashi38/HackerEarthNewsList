@@ -7,13 +7,14 @@ function ApplicationService($log, MyDataService, $filter) {
     "From": 0,
     "To": 0,
     "pageNo": 0
-	};
-	let isFilterEnabled = false;
-	let backupList;
+  };
+  let isFilterEnabled = false;
+  let backupList;
+
   function _appInit() {
     currentRange.From = 0;
     currentRange.To = 9;
-		currentRange.pageNo = 1;
+    currentRange.pageNo = 1;
     return MyDataService.getData().then(function (res) {
       // $log.log(res);
       currentObj = new MyLocalStore(Object.values(res).map(function (e) {
@@ -46,44 +47,47 @@ function ApplicationService($log, MyDataService, $filter) {
         alert("Wrong Navigation");
       } else {
         currentRange.pageNo++;
-        currentRange.To = (currentRange.To + 10) > 99 ? 99 : currentRange.To + 10;
+        currentRange.To = (currentRange.To + 10) > currentObj.data.length ?
+          currentObj.data.length : currentRange.To + 10;
         currentRange.From = currentRange.From + 10;
       }
     }
     return currentObj.getData(currentRange.From, currentRange.To);
   }
-	function _getFullList() {
-		return currentObj.data;
-	}
-	function _getSortedList(val) {
-		currentObj.data = $filter('orderBy')(currentObj.data, val);
-		return currentObj.getData(currentRange.From, currentRange.To);
-	}
-	// function _enableFilter(searchStr) {
-	// 	if(!isFilterEnabled){
-	// 		isFilterEnabled = true;
-	// 		backupList = new MyLocalStore(currentObj.data);
-	// 	}
-	// 	currentObj.data = $filter('filter')(currentObj.data, searchStr);
-	// 	return currentObj.getData(currentRange.From, currentRange.To);
-	// }
+
+  function _getFullList() {
+    return currentObj.data;
+  }
+
+  function _getSortedList(val) {
+    currentObj.data = $filter('orderBy')(currentObj.data, val);
+    return currentObj.getData(currentRange.From, currentRange.To);
+  }
+  // function _enableFilter(searchStr) {
+  // 	if(!isFilterEnabled){
+  // 		isFilterEnabled = true;
+  // 		backupList = new MyLocalStore(currentObj.data);
+  // 	}
+  // 	currentObj.data = $filter('filter')(currentObj.data, searchStr);
+  // 	return currentObj.getData(currentRange.From, currentRange.To);
+  // }
   // function _disableFilter() {
-	// 	if(isFilterEnabled)
-	// 	{
-	// 		isFilterEnabled = false;
-	// 		currentObj = new MyLocalStore(backupList.data);
-	// 	}
-	// 	return currentObj.getData(currentRange.From, currentRange.To);
-	// }
+  // 	if(isFilterEnabled)
+  // 	{
+  // 		isFilterEnabled = false;
+  // 		currentObj = new MyLocalStore(backupList.data);
+  // 	}
+  // 	return currentObj.getData(currentRange.From, currentRange.To);
+  // }
   return {
     appInit: _appInit,
     getCurrentRange: _getCurrentRange,
     getCurrentObj: _getCurrentObj,
     navigate: _navigate,
-		getFullList: _getFullList,
-		getSortedList: _getSortedList
-		// enableFilter: _enableFilter,
-		// disableFilter: _disableFilter
+    getFullList: _getFullList,
+    getSortedList: _getSortedList
+    // enableFilter: _enableFilter,
+    // disableFilter: _disableFilter
   };
 }
 
