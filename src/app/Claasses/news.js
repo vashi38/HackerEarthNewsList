@@ -8,6 +8,7 @@ class News {
     this.author = obj.author;
     this.points = obj.num_points;
     this.comments = obj.num_comments;
+    this.created_at = obj.created_at;
   }
   getFormatedUrl() {
     let formatedUrl;
@@ -18,13 +19,13 @@ class News {
         return e.toUpperCase() !== 'WWW';
       }).join('.');
     } else {
-      formatedUrl = "";
+      formatedUrl = '';
     }
     return formatedUrl;
   }
   getFormatedDesc() {
-    let date = new Date(this.created_at).toDateString();
-    let description = this.points + ' points by ' +
+    const date = new Date(this.created_at).toDateString();
+    const description = this.points + ' points by ' +
       this.author + ' on ' + date +
       ' | hide | ' + this.comments +
       ' comments ';
